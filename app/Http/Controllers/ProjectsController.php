@@ -6,11 +6,6 @@ use App\Project;
 
 class ProjectsController extends Controller
 {
-    /**
-     * View all projects.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $projects = auth()->user()->projects;
@@ -18,46 +13,51 @@ class ProjectsController extends Controller
         return view('projects.index', compact('projects'));
     }
 
-    /**
-     * Show a single project.
-     *
-     * @param \App\Project $project
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function show(Project $project)
     {
-        if (auth()->user()->isNot($project->owner)) {
-            abort(403);
-        }
+        $this->authorize('update', $project);
 
         return view('projects.show', compact('project'));
     }
 
-    /**
-     * Create a new project.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view('projects.create');
     }
 
-    /**
-     * Persist a new project.
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
     public function store()
     {
         $attributes = request()->validate([
             'title' => 'required',
-            'description' => 'required'
+            'description' => 'required',
+            'notes' => 'min:3'
         ]);
         
         $project = auth()->user()->projects()->create($attributes);
 
         return redirect($project->path());
+    }
+
+    public function edit(Project $project)
+    {
+        return view('projects.edit', compact('project'));
+    }
+
+    public function update(Project $project)
+    {
+        $this->authorize('update', $project);
+
+        $project->update($this->validateRequest());
+
+        return redirect($project->path());
+    }
+
+    protected function validateRequest()
+    {
+        return request()->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'notes' => 'min:3'
+        ]);
     }
 }
