@@ -28,4 +28,9 @@ class Travel extends Model
     {
         return $this->tasks()->create(compact('body'));
     }
+
+    public function activity()
+    {
+        return $this->hasMany(activity::class);
+    }
 }
