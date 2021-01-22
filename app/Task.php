@@ -8,15 +8,15 @@ class Task extends Model
 {
     protected $guarded =[];
 
-    protected $touchs = ['project'];
+    protected $touchs = ['travel'];
 
-    protected function project()
+    protected function travel()
     {
-        return $this->belongsTo(Project::class);
+        return $this->belongsTo(Travel::class);
     }
 
     public function path()
     {
-        return "/projects/{$this->project->id}/tasks/{$this->id}";
+        return "/travels/{$this->travel->id}/tasks/{$this->id}";
     }
 }

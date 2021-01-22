@@ -4,13 +4,14 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Project extends Model
+class Travel extends Model
 {
     protected $guarded = [];
+    protected $table = 'travels';
 
     public function path()
     {
-        return "/projects/{$this->id}";
+        return "/travels/{$this->id}";
     }
 
     public function owner()

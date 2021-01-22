@@ -9,7 +9,7 @@
         class="input bg-transparent border border-grey-light rounded p-2 text-xs w-full" 
         name="title" 
         placeholder="Meu próximo projeto."
-        value="{{ $project->title }}"
+        value="{{ $travel->title }}"
         >
     </div>
 </div>
@@ -21,14 +21,14 @@
         <textarea name="description" 
         rows="10" 
         class="textarea bg-transparent border border-grey-light rounded p-2 text-xs w-full" 
-        placeholder="Devo começar com ...">{{ $project->description }}</textarea>
+        placeholder="Devo começar com ...">{{ $travel->description }}</textarea>
     </div>
 </div>
 
 <div class="field">
     <div class="control">
         <button type="submit" class="button is-link mr-2">{{ $buttonText }}</button>
-        <a href="{{ $project->path() }}">Cancelar</a>
+        <a href="{{ $travel->path() }}">Cancelar</a>
     </div>
 </div>
 

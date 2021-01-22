@@ -16,15 +16,15 @@ Route::get('/', function () {
 });
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('/projects', 'ProjectsController@index');
-    Route::get('/projects/create', 'ProjectsController@create');
-    Route::get('/projects/{project}', 'ProjectsController@show');
-    Route::get('/projects/{project}/edit', 'ProjectsController@edit');
-    Route::post('/projects', 'ProjectsController@store');
-    Route::patch('/projects/{project}', 'ProjectsController@update');
+    Route::get('/travels', 'TravelsController@index');
+    Route::get('/travels/create', 'TravelsController@create');
+    Route::get('/travels/{travel}', 'TravelsController@show');
+    Route::get('/travels/{travel}/edit', 'TravelsController@edit');
+    Route::post('/travels', 'TravelsController@store');
+    Route::patch('/travels/{travel}', 'TravelsController@update');
 
-    Route::post('/projects/{project}/tasks', 'ProjectTasksController@store');
-    Route::patch('/projects/{project}/tasks/{task}', 'ProjectTasksController@update');
+    Route::post('/travels/{travel}/tasks', 'TravelTasksController@store');
+    Route::patch('/travels/{travel}/tasks/{task}', 'TravelTasksController@update');
 
     Route::get('/home', 'HomeController@index')->name('home');
 });

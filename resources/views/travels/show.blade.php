@@ -4,11 +4,11 @@
     <header class="flex items-center mb-3 pb-4">
         <div class="flex justify-between items-end w-full">
             <p class="text-grey text-sm font-normal">
-                <a href="/projects" class="text-grey text-sm font-normal no-underline hover:underline">My Projects</a>
-                / {{ $project->title }}
+                <a href="/travels" class="text-grey text-sm font-normal no-underline hover:underline">My Travels</a>
+                / {{ $travel->title }}
             </p>
 
-            <a href="{{ $project->path().'/edit' }}" class="button">Editar</a>
+            <a href="{{ $travel->path().'/edit' }}" class="button">Editar</a>
         </div>
     </header>
 
@@ -19,7 +19,7 @@
                     <h2 class="text-lg text-grey font-normal mb-3">Tarefas</h2>
 
                     {{-- tasks --}}
-                    @foreach ($project->tasks as $task)
+                    @foreach ($travel->tasks as $task)
                         <div class="card mb-3">
                             <form method="POST" action="{{ $task->path() }}">
                                 @method('PATCH')
@@ -34,7 +34,7 @@
                     @endforeach
 
                     <div class="card mb-3">
-                        <form action="{{ $project->path() . '/tasks' }}" method="POST">
+                        <form action="{{ $travel->path() . '/tasks' }}" method="POST">
                             @csrf
 
                             <input placeholder="Add a new task..." class="w-full" name="body">
@@ -46,7 +46,7 @@
                     <h2 class="text-lg text-grey font-normal mb-3">General Notes</h2>
 
                     {{-- general notes --}}
-                    <form method="POST" action="{{ $project->path() }}">
+                    <form method="POST" action="{{ $travel->path() }}">
                         @method('PATCH')
                         @csrf
 
@@ -55,7 +55,7 @@
                             class="card w-full mb-4"
                             style="min-height: 200px"
                             placeholder="Anything special that you want to make a note of?"
-                        >{{ $project->notes }}</textarea>
+                        >{{ $travel->notes }}</textarea>
 
                         <button type="submit" class="button">Save</button>
                     </form>
@@ -66,7 +66,7 @@
             </div>
 
             <div class="lg:w-1/4 px-3 lg:py-8">
-                @include ('projects.card')
+                @include ('travels.card')
             </div>
         </div>
     </main>

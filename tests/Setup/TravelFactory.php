@@ -2,11 +2,11 @@
 
 namespace Tests\Setup;
 
-use App\Project;
+use App\Travel;
 use App\Task;
 use App\User;
 
-class ProjectFactory
+class TravelFactory
 {
     protected $tasksCount = 0;
     protected $user;
@@ -27,15 +27,15 @@ class ProjectFactory
 
     public function create()
     {
-        $project = factory(Project::class)->create([
+        $travel = factory(Travel::class)->create([
             'owner_id' => $this->user ?? factory(User::class)
         ]);
 
         factory(Task::class, $this->tasksCount)->create([
-            'project_id' => $project
+            'travel_id' => $travel
         ]);
 
-        return $project;
+        return $travel;
     }
 }
 

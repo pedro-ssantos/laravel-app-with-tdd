@@ -3,15 +3,15 @@
 namespace App\Policies;
 
 use App\User;
-use App\Project;
+use App\Travel;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class ProjectPolicy
+class TravelPolicy
 {
     use HandlesAuthorization;
 
-    public function update(User $user, Project $project)
+    public function update(User $user, Travel $travel)
     {
-        return $user->is($project->owner);
+        return $user->is($travel->owner);
     }    
 }

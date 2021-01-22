@@ -3,18 +3,20 @@
 @section('content')
     <div class="lg:w-1/2 lg:mx-auto bg-white py-12 px-16 rounded shadow">
         <h1 class="text-2xl font-normal mb-10 text-center">
-            Vamos começar algo Novo!
+            Editar seu Projeto
         </h1>
 
         <form 
             method="POST" 
-            action="/projects" 
+            action="{{ $travel->path() }}" 
         >
-            @include('projects.form', [
-                'project' => new App\Project,
-                'buttonText' => 'Criar Projeto'
+            @method('PATCH')
+            @include('travels.form', [
+                'buttonText' => 'Atualizar Projeto'
             ])
+
+        
         </form>
     </div>
-    
+   
 @endsection

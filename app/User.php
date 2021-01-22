@@ -37,8 +37,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function projects()
+    public function travels()
     {
-        return $this->hasMany(Project::class, 'owner_id')->latest('updated_at');
+        return $this->hasMany(Travel::class, 'owner_id')->latest('updated_at');
     }
 }
