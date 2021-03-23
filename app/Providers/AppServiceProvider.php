@@ -4,7 +4,9 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use App\Observers\TravelObserver;
+use App\Observers\TaskObserver;
 use App\Travel;
+use App\Task;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -26,5 +28,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Travel::observe(TravelObserver::class);
+        Task::observe(TaskObserver::class);
     }
 }

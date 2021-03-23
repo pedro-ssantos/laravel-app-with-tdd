@@ -60,9 +60,22 @@ class TravelTasksTest extends TestCase
     /** @test */
     function a_task_can_be_updated()
     {
-        $travel = TravelFactory::create();
+        $travel = TravelFactory::withTasks(1)->create();
 
-        $task = $travel->addTask('test task');
+        $this->actingAs($travel->owner)
+        ->patch($travel->tasks[0]->path(), [
+            'body' => 'changed',
+        ]);
+
+        $this->assertDatabaseHas('tasks', [
+            'body' => 'changed',
+        ]);
+    }
+
+    /** @test */
+    function a_task_can_be_completed()
+    {
+        $travel = TravelFactory::withTasks(1)->create();
 
         $this->actingAs($travel->owner)
         ->patch($travel->tasks[0]->path(), [
@@ -73,6 +86,30 @@ class TravelTasksTest extends TestCase
         $this->assertDatabaseHas('tasks', [
             'body' => 'changed',
             'completed' => true
+        ]);
+    }
+
+    /** @test */
+    function a_task_can_be_marked_as_incompleted()
+    {
+        $this->withoutExceptionHandling();
+
+        $travel = TravelFactory::withTasks(1)->create();
+
+        $this->actingAs($travel->owner)
+        ->patch($travel->tasks[0]->path(), [
+            'body' => 'changed',
+            'completed' => true
+        ]);
+
+        $this->patch($travel->tasks[0]->path(), [
+            'body' => 'changed',
+            'completed' => false
+        ]);
+
+        $this->assertDatabaseHas('tasks', [
+            'body' => 'changed',
+            'completed' => false
         ]);
     }
 

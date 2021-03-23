@@ -9,19 +9,13 @@ class TravelObserver
 {
     public function created(Travel $travel)
     {
-        $this->recordActivity($travel, 'created');
+        $travel->recordActivity('created');
     }
 
     public function updated(Travel $travel)
     {
-        $this->recordActivity($travel, 'updated');
+        $travel->recordActivity('updated');
     }
 
-    protected function recordActivity($travel, $type)
-    {
-        Activity::create([
-            'travel_id' => $travel->id,
-            'description' => $type
-        ]);
-    }
+    
 }

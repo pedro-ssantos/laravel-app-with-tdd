@@ -35,13 +35,10 @@ class TravelTasksController extends Controller
     {
         $this->authorize('update', $travel);
 
-        request()->validate(['body' => 'required']);
+        $task->update(request()->validate(['body' => 'required']));
 
-        $task->update([
-            'body' => request('body'),
-            'completed' => request()->has('completed')
-        ]);
-
+        $method = request('completed') ? $task->complete() :  $task->incomplete();
+        
         return redirect($travel->path());
     }
 }
